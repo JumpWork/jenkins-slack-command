@@ -42,8 +42,7 @@ post '/' do
   next_build_number = resp_json['nextBuildNumber']
 
   # Get crumb
-  crumb_url = "#{jenkins_job_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)"
-  print crumb_url
+  crumb_url = "#{jenkins_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)"
   crumb = RestClient.get crumb_url
   crumb_key, crumb_val = crumb.body.split(':')
 
