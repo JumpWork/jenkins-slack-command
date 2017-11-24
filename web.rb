@@ -45,7 +45,6 @@ post '/' do
   crumb_url = "#{jenkins_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)"
   crumb = RestClient.get crumb_url
   crumb_key, crumb_val = crumb.body.split(':')
-  parameters[crumb_key] = crumb_val
 
   # Make jenkins request
   json = JSON.generate( {:parameter => parameters} )
