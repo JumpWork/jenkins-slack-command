@@ -41,8 +41,13 @@ post '/' do
   resp_json = JSON.parse( resp.body )
   next_build_number = resp_json['nextBuildNumber']
 
+  # Get crumb
+  crumb = RestClient.get '#{jenkins_job_url}//crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
+  crumb_key, crumb_val = crumb.split(':')
+
   # Make jenkins request
   json = JSON.generate( {:parameter => parameters} )
+  json[crumb_key] = crumb_val
   resp = RestClient.post "#{jenkins_job_url}/build?token=#{jenkins_token}", :json => json
 
   # Build url
