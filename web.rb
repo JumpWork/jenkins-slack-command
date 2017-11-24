@@ -50,7 +50,7 @@ post '/' do
   json = JSON.generate( {:parameter => parameters} )
   headers = {}
   headers[crumb_key] = crumb_val
-  resp = RestClient.post "#{jenkins_job_url}/build?token=#{jenkins_token}", :json => json, headers: headers
+  resp = RestClient.post "#{jenkins_job_url}/build?token=#{jenkins_token}", json, headers
 
   # Build url
   build_url = "#{jenkins_job_url}/#{next_build_number}"
