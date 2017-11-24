@@ -42,8 +42,9 @@ post '/' do
   next_build_number = resp_json['nextBuildNumber']
 
   # Get crumb
-  crumb = RestClient.get "#{jenkins_job_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)"
-  crumb_key, crumb_val = crumb.split(':')
+  crumb_url = "#{jenkins_job_url}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)"
+  crumb = RestClient.get crumb_url
+  crumb_key, crumb_val = crumb.body.split(':')
 
   # Make jenkins request
   json = JSON.generate( {:parameter => parameters} )
