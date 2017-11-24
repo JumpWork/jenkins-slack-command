@@ -9,7 +9,8 @@
       "required": true
     },
     "SLACK_WEBHOOK_URL": {
-      "description": "Your incoming webhook URL"
+      "description": "Your incoming webhook URL",
+      "required": false
     },
     "JENKINS_URL": {
       "description": "URL to your Heroku instnace",
